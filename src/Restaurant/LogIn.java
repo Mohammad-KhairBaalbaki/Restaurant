@@ -37,6 +37,7 @@ public class LogIn extends JFrame implements ActionListener {
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
+        this.setTitle("Login Page");
 
         usernameLabel.setText("Username");
 
