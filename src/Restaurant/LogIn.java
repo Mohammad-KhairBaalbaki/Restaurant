@@ -40,7 +40,7 @@ public class LogIn extends JFrame implements ActionListener {
 
         usernameLabel.setText("Username");
 
-        usernameTextField.setText("jTextField1");
+        usernameTextField.setText(null);
         usernameTextField.addActionListener(this);
         showPasswordCheckBox.addActionListener(new ActionListener() {
             @Override
@@ -54,11 +54,11 @@ public class LogIn extends JFrame implements ActionListener {
         });
         jLabel1.setText("Password");
 
-        passwordField.setText("jPasswordField1");
+        passwordField.setText(null);
 
         confirmButton.setText("Confirm");
         confirmButton.addActionListener(this);
-
+        resetButton.addActionListener(this);
         resetButton.setText("Reset");
 
         GroupLayout layout = new GroupLayout(getContentPane());
@@ -169,14 +169,36 @@ public class LogIn extends JFrame implements ActionListener {
         });
     }
 
+    public boolean checkUsernameAndPassword( String user, String password)
+    {
+
+        if(user.length()==0 || password.length()==0)
+        {
+            JOptionPane.showMessageDialog(null,"invalid input , please insert fields correctly !","error",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        else if(password.length()<8)
+        {
+            JOptionPane.showMessageDialog(null,"invalid Password , your password should be between 8 and 20 character !","error",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==confirmButton)
         {
-            System.out.println(usernameTextField.getText());
-            System.out.println(passwordField.getPassword());
-
-
+            if(checkUsernameAndPassword(usernameTextField.getText(),passwordField.getText()))
+            {
+                Main.username=passwordField.getText();
+                Main.password=passwordField.getText();
+                Main.guestOrNot=false;
+            }
+        }
+        if(e.getSource()==resetButton)
+        {
+            usernameTextField.setText(null);
+            passwordField.setText(null);
         }
     }
 }
